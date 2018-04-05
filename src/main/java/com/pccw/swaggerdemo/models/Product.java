@@ -11,6 +11,7 @@ public class Product {
 		this.price = price;
 	}
 	
+	//Will display the notes on which each field is supposed to do
 	@ApiModelProperty(notes = "The ID of the product, this is a String")
 	private String productId;
 	@ApiModelProperty(notes = "The name of the product, this is a String")

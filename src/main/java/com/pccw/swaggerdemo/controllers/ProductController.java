@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/product")
+//Sates the description for the product path
 @Api(value  = "Digital Store Products API", description = "Contains the endpoints for products")
 public class ProductController {
 	
@@ -26,10 +27,12 @@ public class ProductController {
 	private ProductService productService;
 	
 	@GetMapping(value = "/list", produces = "application/json")
+	//Description for each endpoints, also include the type of class for the response of the end point
 	@ApiOperation(value = "Display all products", response = Product[].class)
+	//We can specify in the document on what message to return for each response code
 	@ApiResponses(value = {
-			@ApiResponse(code = 404, message = "wala dito"),
-			@ApiResponse(code = 200, message = "meron dito"),
+			@ApiResponse(code = 404, message = "We got nothing for you"),
+			@ApiResponse(code = 200, message = "We got it all for you"),
 	})
 	public List<Product> getProducts(){
 		return productService.getProductList();
@@ -45,6 +48,4 @@ public class ProductController {
 	public Product getProduct(@PathVariable("productId") String productId){
 		return productService.getProduct(productId);
 	}
-	
-
 }
