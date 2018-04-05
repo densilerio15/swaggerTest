@@ -26,9 +26,10 @@ public class ProductController {
 	@GetMapping(value = "/list", produces = "application/json")
 	@ApiOperation(value = "Display all products", response = Product[].class)
 	@ApiResponses(value = {
-			@ApiResponse(code = 404, message = "wala dito"),
-			@ApiResponse(code = 200, message = "meron dito"),
-	})
+			@ApiResponse(code = 404, message = "Not Found"),
+			@ApiResponse(code = 200, message = "Success"),
+	}
+)
 	public List<Product> getProducts(){
 		return productService.getProductList();
 	}
