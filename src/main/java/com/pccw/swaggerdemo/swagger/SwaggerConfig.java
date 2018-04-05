@@ -22,11 +22,10 @@ public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("digitalstore-gateway")
 				//Only get controllers and products path
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.pccw.swaggerdemo.controllers"))
-				.paths(PathSelectors.regex("/products.*"))
+				.paths(PathSelectors.regex("/product.*"))
 				.build()
 				.apiInfo(getApiInfo());
 	}
