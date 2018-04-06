@@ -21,5 +21,9 @@ public class ProductService {
 		
 		return productList;
 	}
+	
+	public Product getProduct(String productId) {
+		return new Product(productId, "new product with new ID", 100.00);
+	}
 
 }

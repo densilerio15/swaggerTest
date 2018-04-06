@@ -1,6 +1,7 @@
 package com.pccw.swaggerdemo.controllers;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -52,13 +53,30 @@ public class ProductControllerTest {
 		
 		//when
 		//Mock the HTTP request, in this case a GET request which produces JSON
-		ResultActions resultActions = mvc.perform(get("/product/").contentType(MediaType.APPLICATION_JSON));
+		ResultActions resultActions = mvc.perform(get("/product/list").contentType(MediaType.APPLICATION_JSON));
 		
 		//then
 		//Test cases
 		resultActions
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$", hasSize(4)));
+	}
+	
+	@Test
+	public void givenProductId_whenGetProduct_thenReturnJSONWithProductIdAndStatusOk() throws Exception {
+		//Given
+		String productId = "NEW123";
+		Product product = new Product(productId, "test name", 1000.00);
+		given(service.getProduct(productId)).willReturn(product);
+		
+		//When
+		ResultActions resultActions = mvc.perform(get("/product/{productId}", productId)
+									.contentType(MediaType.APPLICATION_JSON));
+		
+		//Then
+		resultActions
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.productId", is(productId)));
 	}
 
 }
